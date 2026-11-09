@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T21:02:31.603942+00:00",
+  "updated_at": "2026-11-09T21:13:24.097679+00:00",
   "offers": [
     {
       "id": "30-dias-netflix-premium-ultra-4k-mr-c1900dde-html",
@@ -260,51 +260,191 @@
   "failures": [
     {
       "url": "https://ggmax.com.br/anuncio/30-dias-netflix-premium-ultra-4k--mr-c1900dde",
-      "error": "HTTP 404"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:12:59.538202+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/chatgpt-youtube-prime-video-netflix-capcut-crunchyroll-gemini-envio-automatico",
-      "error": "HTTP 404"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:01.794917+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/netflix-4k-tela-privada-30-dias-entrega-automatica--mr-46debf6d?item=263930",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:03.823973+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/netflix-4k-tela-privada-exclusiva-por-30-dias-brinde-entrega-automatica-5wl5bxin?item=374022",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:05.853898+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/netflix-4k-ultra-hd-30-dias-1-tela-com-pin-entrega-automatica-vk1oxso--mr-662d13c7?item=943297",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:07.875945+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/netflix-chatgpt-prime-youtube-crunchyroll-capcut-spotify-deezer-envio-automatico",
-      "error": "HTTP 404"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:09.902849+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/netflix-prime-video-capcut-pro-crunchryoll-youtube-canva-automatica-yzjqmug?item=2294664",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:11.925222+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/netflix-spotify-premiu-youtube-premium-crunchyrol-prime-video-deezer-entrega-aut?item=1961561",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:13.948228+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/netflix-youtube-spotify-prime-video-chatgpt-plus-entrega-automatica?item=2481369",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:15.969976+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/prime-video-spotify-viki-deezer-canva-crunchyroll-netflix-mubi-capcut?item=476064",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:17.992368+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/youtube-gemini4-prime-video-netflix-capcut-chatgpt-crunchyroll-envio-automatico?item=2060161",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:20.014452+00:00"
     },
     {
       "url": "https://ggmax.com.br/anuncio/youtube-gpt-netflix-amazonprime-gemini-capcut-spotify-crunchyroll-automatico?item=347691",
-      "error": "URL inválida ou domínio não permitido"
+      "error": "Servidor respondeu HTTP 404",
+      "http_status": 404,
+      "checked_at": "2026-11-09T21:13:22.050605+00:00"
     }
-  ]
+  ],
+  "checks": [
+    {
+      "url": "https://ggmax.com.br/anuncio/30-dias-netflix-premium-ultra-4k--mr-c1900dde",
+      "checked_at": "2026-11-09T21:12:59.538202+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/chatgpt-youtube-prime-video-netflix-capcut-crunchyroll-gemini-envio-automatico",
+      "checked_at": "2026-11-09T21:13:01.794917+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-4k-tela-privada-30-dias-entrega-automatica--mr-46debf6d?item=263930",
+      "checked_at": "2026-11-09T21:13:03.823973+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-4k-tela-privada-exclusiva-por-30-dias-brinde-entrega-automatica-5wl5bxin?item=374022",
+      "checked_at": "2026-11-09T21:13:05.853898+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-4k-ultra-hd-30-dias-1-tela-com-pin-entrega-automatica-vk1oxso--mr-662d13c7?item=943297",
+      "checked_at": "2026-11-09T21:13:07.875945+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-chatgpt-prime-youtube-crunchyroll-capcut-spotify-deezer-envio-automatico",
+      "checked_at": "2026-11-09T21:13:09.902849+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-prime-video-capcut-pro-crunchryoll-youtube-canva-automatica-yzjqmug?item=2294664",
+      "checked_at": "2026-11-09T21:13:11.925222+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-spotify-premiu-youtube-premium-crunchyrol-prime-video-deezer-entrega-aut?item=1961561",
+      "checked_at": "2026-11-09T21:13:13.948228+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-youtube-spotify-prime-video-chatgpt-plus-entrega-automatica?item=2481369",
+      "checked_at": "2026-11-09T21:13:15.969976+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/prime-video-spotify-viki-deezer-canva-crunchyroll-netflix-mubi-capcut?item=476064",
+      "checked_at": "2026-11-09T21:13:17.992368+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/youtube-gemini4-prime-video-netflix-capcut-chatgpt-crunchyroll-envio-automatico?item=2060161",
+      "checked_at": "2026-11-09T21:13:20.014452+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/youtube-gpt-netflix-amazonprime-gemini-capcut-spotify-crunchyroll-automatico?item=347691",
+      "checked_at": "2026-11-09T21:13:22.050605+00:00",
+      "status": "error",
+      "http_status": 404,
+      "content_type": "application/json",
+      "bytes": 66,
+      "reason": "Servidor respondeu HTTP 404"
+    }
+  ],
+  "monitor_summary": {
+    "total": 12,
+    "success": 0,
+    "failures": 12,
+    "changes": 0
+  }
 }
