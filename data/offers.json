@@ -1,5 +1,5 @@
 {
-  "updated_at": null,
+  "updated_at": "2026-11-09T21:02:31.603942+00:00",
   "offers": [
     {
       "id": "30-dias-netflix-premium-ultra-4k-mr-c1900dde-html",
@@ -257,5 +257,54 @@
   ],
   "variants": [],
   "history": [],
-  "failures": []
+  "failures": [
+    {
+      "url": "https://ggmax.com.br/anuncio/30-dias-netflix-premium-ultra-4k--mr-c1900dde",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/chatgpt-youtube-prime-video-netflix-capcut-crunchyroll-gemini-envio-automatico",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-4k-tela-privada-30-dias-entrega-automatica--mr-46debf6d?item=263930",
+      "error": "URL inválida ou domínio não permitido"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-4k-tela-privada-exclusiva-por-30-dias-brinde-entrega-automatica-5wl5bxin?item=374022",
+      "error": "URL inválida ou domínio não permitido"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-4k-ultra-hd-30-dias-1-tela-com-pin-entrega-automatica-vk1oxso--mr-662d13c7?item=943297",
+      "error": "URL inválida ou domínio não permitido"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-chatgpt-prime-youtube-crunchyroll-capcut-spotify-deezer-envio-automatico",
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-prime-video-capcut-pro-crunchryoll-youtube-canva-automatica-yzjqmug?item=2294664",
+      "error": "URL inválida ou domínio não permitido"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-spotify-premiu-youtube-premium-crunchyrol-prime-video-deezer-entrega-aut?item=1961561",
+      "error": "URL inválida ou domínio não permitido"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/netflix-youtube-spotify-prime-video-chatgpt-plus-entrega-automatica?item=2481369",
+      "error": "URL inválida ou domínio não permitido"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/prime-video-spotify-viki-deezer-canva-crunchyroll-netflix-mubi-capcut?item=476064",
+      "error": "URL inválida ou domínio não permitido"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/youtube-gemini4-prime-video-netflix-capcut-chatgpt-crunchyroll-envio-automatico?item=2060161",
+      "error": "URL inválida ou domínio não permitido"
+    },
+    {
+      "url": "https://ggmax.com.br/anuncio/youtube-gpt-netflix-amazonprime-gemini-capcut-spotify-crunchyroll-automatico?item=347691",
+      "error": "URL inválida ou domínio não permitido"
+    }
+  ]
 }
