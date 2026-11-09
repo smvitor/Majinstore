@@ -1,112 +1,36 @@
-"""MajinStore 3.0: diagnóstico de ofertas públicas; não infere preços de variantes."""
-import datetime as dt
-import json
-import os
-from pathlib import Path
-import re
-import time
-from urllib.parse import urlparse
-
-import requests
+"""Conservative public-page fetcher. No login, CAPTCHA bypass or fabricated variants."""
+import json,os,re,time,datetime,pathlib,requests
 from bs4 import BeautifulSoup
-
-ROOT = Path(__file__).resolve().parent
-DATA = ROOT / 'data' / 'offers.json'
-LINKS = ROOT / 'links.txt'
-NOW = lambda: dt.datetime.now(dt.timezone.utc).isoformat()
-ALLOWED_HOSTS = {'ggmax.com.br', 'www.ggmax.com.br'}
-
-
-def money(text):
-    m = re.search(r'R\$\s*([\d.]+,\d{2})', text)
-    return round(float(m.group(1).replace('.', '').replace(',', '.')), 2) if m else None
-
-
-def extract(html):
-    soup = BeautifulSoup(html, 'html.parser')
-    title = soup.select_one('h1')
-    if not title:
-        return None, None, 'Título principal não encontrado'
-    # Only extract from the explicitly known primary-price element.
-    # Other R$ values may be from related ads or different variants.
-    price_node = soup.select_one('.price__container h3')
-    if not price_node:
-        return title.get_text(' ', strip=True), None, 'Seletor do preço principal não encontrado; layout possivelmente mudou'
-    price = money(price_node.get_text(' ', strip=True))
-    if price is None:
-        return title.get_text(' ', strip=True), None, 'Preço principal sem valor reconhecível'
-    return title.get_text(' ', strip=True), price, None
-
-
-def main():
-    data = json.loads(DATA.read_text(encoding='utf-8'))
-    urls = list(dict.fromkeys(line.strip() for line in LINKS.read_text(encoding='utf-8').splitlines()
-                              if line.strip() and not line.lstrip().startswith('#')))[:100]
-    offers = {item['url']: item for item in data.get('offers', []) if item.get('url')}
-    failures, changes, checks = [], [], []
-    session = requests.Session()
-    session.headers.update({'User-Agent': 'MajinStorePriceMonitor/1.1 (public pages; contact site for access)'})
-    for url in urls:
-        checked = NOW()
-        result = {'url': url, 'checked_at': checked, 'status': 'error'}
-        parsed = urlparse(url)
-        if parsed.scheme != 'https' or parsed.hostname not in ALLOWED_HOSTS or not parsed.path.startswith('/anuncio/'):
-            result['reason'] = 'URL fora do formato permitido'
-        else:
-            try:
-                response = session.get(url, timeout=20, allow_redirects=False)
-                result['http_status'] = response.status_code
-                result['content_type'] = response.headers.get('Content-Type', '')[:100]
-                result['bytes'] = len(response.content)
-                if 300 <= response.status_code < 400:
-                    target = response.headers.get('Location', '')
-                    result['reason'] = 'Redirecionamento HTTP; destino: ' + target[:120]
-                elif response.status_code != 200:
-                    result['reason'] = 'Servidor respondeu HTTP ' + str(response.status_code)
-                elif 'html' not in result['content_type'].lower():
-                    result['reason'] = 'Resposta não é HTML'
-                else:
-                    title, price, error = extract(response.text)
-                    if error:
-                        result['reason'] = error
-                    else:
-                        old = offers.get(url, {})
-                        old_price = old.get('price')
-                        if isinstance(old_price, (int, float)) and abs(old_price - price) > 0.001:
-                            changes.append({'url': url, 'before': old_price, 'after': price, 'title': title})
-                        offers[url] = {**old, 'url': url, 'title': title, 'price': price,
-                                       'checked_at': checked, 'price_scope': 'Preço principal do anúncio; variante NÃO confirmada'}
-                        result['status'] = 'ok'
-                        result['price'] = price
-                        result['title'] = title
-            except requests.exceptions.RequestException as exc:
-                result['reason'] = 'Erro de rede: ' + str(exc)[:160]
-            except Exception as exc:
-                result['reason'] = 'Erro de extração: ' + str(exc)[:160]
-        if result['status'] != 'ok':
-            failures.append({'url': url, 'error': result.get('reason', 'Desconhecido'),
-                             'http_status': result.get('http_status'), 'checked_at': checked})
-        checks.append(result)
-        print(f"[{len(checks)}/{len(urls)}] {result['status'].upper()} HTTP {result.get('http_status','-')} {url} | {result.get('reason', 'preço '+str(result.get('price')))}", flush=True)
-        time.sleep(2)
-    data['offers'] = list(offers.values())
-    data['updated_at'] = NOW()
-    data['failures'] = failures
-    data['checks'] = checks
-    data['monitor_summary'] = {'total': len(urls), 'success': len(urls)-len(failures),
-                               'failures': len(failures), 'changes': len(changes)}
-    DATA.parent.mkdir(parents=True, exist_ok=True)
-    DATA.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding='utf-8')
-    msg = f"MajinStore: {len(urls)-len(failures)}/{len(urls)} consultas OK, {len(failures)} falhas, {len(changes)} alterações verificadas."
-    print(msg)
-    token, chat = os.getenv('TELEGRAM_BOT_TOKEN'), os.getenv('TELEGRAM_CHAT_ID')
-    if token and chat and (changes or failures):
-        try:
-            requests.post(f'https://api.telegram.org/bot{token}/sendMessage',
-                          json={'chat_id': chat, 'text': msg}, timeout=12).raise_for_status()
-        except requests.exceptions.RequestException as exc:
-            print('Falha no Telegram:', exc)
-
-
-if __name__ == '__main__':
-    main()
+P=pathlib.Path(__file__).parent
+f=P/'data/offers.json'
+d=json.loads(f.read_text()); urls=[x.strip() for x in (P/'links.txt').read_text().splitlines() if x.strip() and not x.startswith('#')][:100]
+byurl={r.get('url'):r for r in d.get('offers',[])};fail=[];changes=[]
+headers={'User-Agent':'MajinStorePriceMonitor/1.0 (public pages; low frequency)'}
+for url in urls:
+    if not re.match(r'^https://ggmax\.com\.br/anuncio/[a-zA-Z0-9_-]+$',url):
+        fail.append({'url':url,'error':'URL inválida ou domínio não permitido'});continue
+    try:
+        response=requests.get(url,headers=headers,timeout=18,allow_redirects=False)
+        if response.status_code!=200:raise ValueError('HTTP '+str(response.status_code)+' (acesso automatizado pode diferir do Safari; não significa necessariamente anúncio removido)')
+        soup=BeautifulSoup(response.text,'html.parser')
+        title=soup.select_one('h1')
+        price=soup.select_one('.price__container h3')
+        if not title or not price:raise ValueError('HTML sem título/preço verificáveis; possível bloqueio ou mudança de layout')
+        raw=price.get_text(' ',strip=True);m=re.search(r'R\$\s*([\d.,]+)',raw)
+        if not m:raise ValueError('Preço principal não reconhecido')
+        val=float(m.group(1).replace('.','').replace(',','.'))
+        old=byurl.get(url,{})
+        if old.get('price') is not None and old['price']!=val:
+            changes.append({'url':url,'title':title.get_text(' ',strip=True),'before':old['price'],'after':val})
+        byurl[url]={**old,'url':url,'title':title.get_text(' ',strip=True),'price':val,'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'price_scope':'Preço principal do anúncio; variante NÃO confirmada'}
+    except Exception as e:fail.append({'url':url,'error':str(e)[:150]})
+    time.sleep(2)
+d['offers']=list(byurl.values());d['last_attempt_at']=datetime.datetime.now(datetime.timezone.utc).isoformat();
+if len(fail)<len(urls):d['updated_at']=d['last_attempt_at'];d['failures']=fail[-100:];d['monitor_status']={'attempted':len(urls),'success':len(urls)-len(fail),'failed':len(fail),'automatic_collection_ok':len(fail)<len(urls)};f.write_text(json.dumps(d,ensure_ascii=False,indent=2))
+# Only report verified listing-level changes, never label them as variant alerts.
+msg='MajinStore: '+str(len(changes))+' alteração(ões) de preço principal e '+str(len(fail))+' falha(s). Confira o painel.'
+token=os.getenv('TELEGRAM_BOT_TOKEN');chat=os.getenv('TELEGRAM_CHAT_ID')
+if token and chat and (changes or fail):
+    try:requests.post('https://api.telegram.org/bot'+token+'/sendMessage',json={'chat_id':chat,'text':msg},timeout=12).raise_for_status()
+    except Exception as e:print('Falha no alerta Telegram:',e)
+print(msg)

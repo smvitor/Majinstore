@@ -19,3 +19,11 @@ Opcional: configure os secrets `TELEGRAM_BOT_TOKEN` e `TELEGRAM_CHAT_ID` no GitH
 - Cálculo fiscal é estimativo e configurável, não aconselhamento tributário.
 - Um dos anúncios fornecidos declara expressamente que não fornece para revenda; o painel sinaliza isso.
 - Não armazene dados privados ou tokens em repositório público.
+
+
+## Atualização 3.1 — variantes e restrições
+- `data/offers.json` inclui quatro variantes Netflix verificadas visualmente no anúncio LaraConte21, com preços individuais e aviso **não permite revenda**.
+- A interface deve mostrar essas variantes sem sugerir revenda dos itens proibidos.
+- `collector.py` não apaga dados antigos se receber HTTP 404 e registra `last_attempt_at` separadamente de `updated_at`. A coleta automática depende de acesso permitido ao site.
+- Para auditar HTML salvo: `python import_saved_html.py arquivo.html` (requer beautifulsoup4). O script **não** associa preços a variantes sem comprovação.
+- Suba os arquivos preservando `data/offers.json` dentro da pasta `data` e `.github/workflows/collect.yml` dentro das pastas ocultas.
